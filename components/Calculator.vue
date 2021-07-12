@@ -1,32 +1,55 @@
 <template>
   <div>
-    <h1 class="text-2xl mb-1">2021/22 Australian Income Tax Rates</h1>
-    <p class="text-blue-200 italic mb-8">(Medicare levy not yet included)</p>
+    <h1 class="text-3xl mb-4">2021/22 Australian Income Tax Calculator</h1>
 
     <form>
-      <label for="income" class="block">Income</label>
-      <input v-model.number="income" type="number" name="income" id="income" step="1" min="0" placeholder="pre-tax income" class="bg-gray-200 text-gray-900 p-1 shadow:md">
+      <div class="p-6 pt-4 bg-green-400 text-black shadow-lg">
+        <label for="income" class="block mb-2 text-xl">Income</label>
+        <input v-model.number="income" type="number" name="income" id="income" step="1" min="0" placeholder="pre-tax income" class="bg-gray-200 text-gray-900 p-1 shadow:md">
+      </div>
 
-      <h2 class="my-4 text-xl text-blue-300">${{ income.toLocaleString() }}</h2>
-
-      <div class="py-4 text-xl">
-        Tax <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ tax() }}</output>
+      <div class="mt-8 py-4 text-xl">
+        <span class="inline-block w-36">Income</span>
+        <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ income.toLocaleString() }}</output>
       </div>
       <div class="py-4 text-xl">
-        Medicare Levy Est. <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ medicare() }}</output>
+        <span class="inline-block w-36">Tax</span>
+        <output class="py-1 px-2 bg-gray-900 text-gray-200">{{ round(tax()).toLocaleString() }}</output>
+      </div>
+      <div class="py-4 text-xl">
+        <span class="inline-block w-36">Medicare Levy</span>
+        <output class="py-1 px-2 bg-gray-900 text-gray-200">{{ round(medicare()).toLocaleString() }}</output>
+        <small class="block text-sm">(estimate only)</small>
+
         <p
           v-show="income >= medicareData.from && income < medicareData.full"
-          class="text-yellow-400 mt-2 text-sm max-w-xs"
+          class="bg-gray-900 text-gray-300 mt-3 p-3 text-sm"
         >
-          * Medicare levy is discounted for income under ${{ medicareData.full }}. This estimate does not account for that discount.
+          * Medicare levy is discounted for income under ${{ medicareData.full.toLocaleString() }}. This estimate does not account for that discount.
         </p>
       </div>
-      <div class="py-4 text-xl">
-        Nett <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ nett() }}</output>
-      </div>
-      <div class="py-4 text-xl">
-        <p class="mb-1">Nett /week <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ nettWeek() }}</output></p>
-        <p class="mb-1">Nett /month <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ round(nett()/12) }}</output></p>
+
+      <div class="p-6 py-2 border border-solid border-green-400">
+
+        <div class="py-2 text-xl">
+          <span class="inline-block w-36">Nett</span>
+          <output class="py-1 px-2 bg-gradient-to-tr from-green-500 to-green-200 text-gray-900">${{ round(nett()).toLocaleString() }}</output>
+        </div>
+        
+        <div class="py-2">
+          <p class="mb-1">
+            <span class="inline-block w-36 pl-4">/week</span>
+            <output class="py-1 px-2 bg-gradient-to-tr from-green-300 to-green-200 text-gray-900">{{ round(nett()/52).toLocaleString() }}</output>
+          </p>
+          <p class="mb-1">
+            <span class="inline-block w-36 pl-4">/fortnight</span>
+            <output class="py-1 px-2 bg-gradient-to-tr from-green-300 to-green-200 text-gray-900">{{ round(nett()/26).toLocaleString() }}</output>
+          </p>
+          <p class="mb-1">
+            <span class="inline-block w-36 pl-4">/month</span>
+            <output class="py-1 px-2 bg-gradient-to-tr from-green-300 to-green-200 text-gray-900">{{ round(nett()/12).toLocaleString() }}</output>
+          </p>
+        </div>
       </div>
 
     </form>
