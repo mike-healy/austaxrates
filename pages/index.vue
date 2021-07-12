@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen p-12 bg-gray-800 text-white">
-    <div class="grid grid-flow-col xxgrid-cols-2 gap-12">
+    <div class="md:grid grid-flow-col gap-12">
       <main class="order-2">
         <Calculator />
         

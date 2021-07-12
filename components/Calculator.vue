@@ -13,6 +13,15 @@
         Tax <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ tax() }}</output>
       </div>
       <div class="py-4 text-xl">
+        Medicare Levy Est. <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ medicare() }}</output>
+        <p
+          v-show="income >= medicareData.from && income < medicareData.full"
+          class="text-yellow-400 mt-2 text-sm max-w-xs"
+        >
+          * Medicare levy is discounted for income under ${{ medicareData.full }}. This estimate does not account for that discount.
+        </p>
+      </div>
+      <div class="py-4 text-xl">
         Nett <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ nett() }}</output>
       </div>
       <div class="py-4 text-xl">
@@ -40,22 +49,27 @@ export default {
     It does reduce between that and 29033, but I don't know according to which formula.
     */
 
+    props: {
+      finYear: {
+        type: String,
+        default: () => '2021-22'
+      }
+    },
+
+    created: function() {
+      this.fnYearBrackets = this.getBrackets(this.finYear).taxBrackets
+      this.medicareData = this.getBrackets(this.finYear).medicare
+    },
+
     data() {
       return {
-        fnYearBrackets: [
-          {from:      0, to:  18200, accumulatedTax:     0, rate:    0},
-          {from:  18200, to:  45000, accumulatedTax:     0, rate: 0.19},
-          {from:  45000, to: 120000, accumulatedTax:  5092, rate: 0.325},
-          {from: 120000, to: 180000, accumulatedTax: 29467, rate: 0.375},
-          {from: 180000, to:   null, accumulatedTax: 51667, rate: 0.45},
-        ],
         
-        income: 50*1000,
+        income: 52*1000,
       }
     },
 
     computed: {
-      currentBracket: function() {
+      currentIncomeBracket: function() {
         for (let i=0; i<this.fnYearBrackets.length; i++) {
           if (this.income <= this.fnYearBrackets[i].to || this.fnYearBrackets[i].to === null) {
             return this.fnYearBrackets[i]
@@ -68,16 +82,44 @@ export default {
       round: a =>  Math.round(a*100)/100,
 
       tax() {
-        return (this.income-this.currentBracket.from) * this.currentBracket.rate + this.currentBracket.accumulatedTax
+        const bracket = this.currentIncomeBracket
+        return (this.income-bracket.from) * bracket.rate + bracket.accumulatedTax
+      },
+
+      medicare() {
+        if (this.income <= this.medicareData.from) return 0
+        return this.income * this.medicareData.rate
       },
 
       nett() {
-        return this.income - this.tax()
+        return this.income - this.tax() - this.medicare()
       },
 
       nettWeek() {
         return this.round(this.nett()/52)
-      }
+      },
+
+      getBrackets(financialYear) {
+        switch(financialYear) {
+          case '2021-22':
+            return {
+              medicare: {
+                from: 23226, //levy starts to apply from this income, but at discounted rate
+                full: 29033, //reaches full rate (below) from this income
+                rate: 0.02
+              },
+              taxBrackets: [
+                {from:      0, to:  18200, accumulatedTax:     0, rate:    0},
+                {from:  18200, to:  45000, accumulatedTax:     0, rate: 0.19},
+                {from:  45000, to: 120000, accumulatedTax:  5092, rate: 0.325},
+                {from: 120000, to: 180000, accumulatedTax: 29467, rate: 0.375},
+                {from: 180000, to:   null, accumulatedTax: 51667, rate: 0.45},
+              ]
+            }
+          break;
+        }
+        
+      },
     }
 
 }
