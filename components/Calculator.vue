@@ -3,7 +3,7 @@
     <h1 class="text-3xl mb-4">2021/22 Australian Income Tax Calculator</h1>
 
     <form>
-      <div class="p-6 pt-4 bg-green-400 text-black shadow-lg">
+      <div class="p-6 pt-4 bg-gradient-to-tr from-green-600 to-green-400 text-black shadow-lg">
         <label for="income" class="block mb-2 text-xl">Income</label>
         <input v-model.number="income" type="number" name="income" id="income" step="1" min="0" placeholder="pre-tax income" class="bg-gray-200 text-gray-900 p-1 shadow:md">
       </div>
@@ -29,7 +29,7 @@
         </p>
       </div>
 
-      <div class="p-6 py-2 border border-solid border-green-400">
+      <section class="p-6 py-2 border border-solid border-green-400">
 
         <div class="py-2 text-xl">
           <span class="inline-block w-36">Nett</span>
@@ -50,7 +50,14 @@
             <output class="py-1 px-2 bg-gradient-to-tr from-green-300 to-green-200 text-gray-900">{{ round(nett()/12).toLocaleString() }}</output>
           </p>
         </div>
-      </div>
+
+      </section>
+
+      <!-- Result rates -->
+      <section class="p-4 mt-6 border border-solid border-gray-700 text-gray-300">
+        <p class="mb-2">{{ round(( tax()+medicare() )/income * 100) }}% overall tax &amp; medicare combined rate.</p>
+        <p>{{ currentIncomeBracket.rate*100 }}% top marginal rate (excluding Medicare levy of {{ medicareData.rate*100 }}%)</p>
+      </section>
 
     </form>
   </div>
@@ -147,7 +154,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>
