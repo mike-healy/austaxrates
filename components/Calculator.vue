@@ -42,12 +42,12 @@
             <output class="py-1 px-2 bg-gradient-to-tr from-yellow-300 to-yellow-200 text-gray-900">${{ round(nett()/52).toLocaleString() }}</output>
           </p>
           <p class="mb-2">
-            <span class="inline-block text-right w-36 px-4 text-yellow-300">/ fortnight</span>
-            <output class="py-1 px-2 bg-gradient-to-tr from-yellow-400 to-yellow-300 text-gray-900">${{ round(nett()/26).toLocaleString() }}</output>
+            <span class="inline-block text-right w-36 px-4 text-yellow-200">/ fortnight</span>
+            <output class="py-1 px-2 bg-gradient-to-tr from-yellow-300 to-yellow-200 text-gray-900">${{ round(nett()/26).toLocaleString() }}</output>
           </p>
           <p class="mb-2">
-            <span class="inline-block text-right w-36 px-4 text-yellow-400">/ month</span>
-            <output class="py-1 px-2 bg-gradient-to-tr from-yellow-500 to-yellow-400 text-gray-900">${{ round(nett()/12).toLocaleString() }}</output>
+            <span class="inline-block text-right w-36 px-4 text-yellow-200">/ month</span>
+            <output class="py-1 px-2 bg-gradient-to-tr from-yellow-300 to-yellow-200 text-gray-900">${{ round(nett()/12).toLocaleString() }}</output>
           </p>
         </div>
 

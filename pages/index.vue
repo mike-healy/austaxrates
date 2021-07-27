@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen p-12 bg-gray-800 text-white">
+  <div class="min-h-screen p-6 md:p-12 bg-gray-800 text-white">
     <div class="md:grid grid-flow-col gap-24">
       <main>
         <Calculator />
