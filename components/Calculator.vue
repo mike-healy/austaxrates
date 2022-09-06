@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-3xl mb-4">2021/22 Australian Income Tax Calculator</h1>
+    <h1 class="text-3xl mb-4">2022/23 Australian Income Tax Calculator</h1>
 
     <form>
       <div class="p-6 pt-4 bg-gradient-to-tr from-green-600 to-green-400 text-black shadow-lg">
@@ -85,7 +85,7 @@ export default {
     props: {
       finYear: {
         type: String,
-        default: () => '2021-22'
+        default: () => '2022-23'
       }
     },
 
@@ -135,6 +135,7 @@ export default {
       getBrackets(financialYear) {
         switch(financialYear) {
           case '2021-22':
+          case '2022-23':
             return {
               medicare: {
                 from: 23226, //levy starts to apply from this income, but at discounted rate
