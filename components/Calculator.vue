@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-3xl mb-4">2022/23 Australian Income Tax Calculator</h1>
+    <h1 class="text-3xl mb-4">2023/24 Australian Income Tax Calculator</h1>
 
     <form>
       <div class="p-6 pt-4 bg-gradient-to-tr from-green-600 to-green-400 text-black shadow-lg">
@@ -85,7 +85,7 @@ export default {
     props: {
       finYear: {
         type: String,
-        default: () => '2022-23'
+        default: () => '2023-24'
       }
     },
 
@@ -96,8 +96,7 @@ export default {
 
     data() {
       return {
-        
-        income: 52*1000,
+        income: 64.2*1000,
       }
     },
 
@@ -147,6 +146,21 @@ export default {
                 {from:  18200, to:  45000, accumulatedTax:     0, rate: 0.19},
                 {from:  45000, to: 120000, accumulatedTax:  5092, rate: 0.325},
                 {from: 120000, to: 180000, accumulatedTax: 29467, rate: 0.375},
+                {from: 180000, to:   null, accumulatedTax: 51667, rate: 0.45},
+              ]
+            }
+          case '2023-24':
+            return {
+              medicare: {
+                from: 24276,
+                full: 30345,
+                rate: 0.02
+              },
+              taxBrackets: [
+                {from:      0, to:  18200, accumulatedTax:     0, rate:    0},
+                {from:  18200, to:  45000, accumulatedTax:     0, rate: 0.19},
+                {from:  45000, to: 120000, accumulatedTax:  5092, rate: 0.325},
+                {from: 120000, to: 180000, accumulatedTax: 29467, rate: 0.37},
                 {from: 180000, to:   null, accumulatedTax: 51667, rate: 0.45},
               ]
             }
