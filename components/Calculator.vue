@@ -165,6 +165,22 @@ export default {
               ]
             }
           break;
+          case '2024-25':
+            return {
+              medicare: {
+                from: 24276,
+                full: 30345,
+                rate: 0.02
+              },
+              taxBrackets: [
+                {from:      0, to:  18200, accumulatedTax:     0, rate:    0},
+                {from:  18200, to:  45000, accumulatedTax:     0, rate: 0.16},
+                {from:  45000, to: 135000, accumulatedTax:  5092, rate: 0.3},
+                {from: 135000, to: 190000, accumulatedTax: 29467, rate: 0.37},
+                {from: 190000, to:   null, accumulatedTax: 51667, rate: 0.45},
+              ]
+            }
+          break;
         }
         
       },
