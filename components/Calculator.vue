@@ -3,14 +3,17 @@
     <h1 class="text-3xl mb-4">2023/24 Australian Income Tax Calculator</h1>
 
     <form>
-      <div class="p-6 pt-4 bg-gradient-to-tr from-green-600 to-green-400 text-black shadow-lg">
-        <label for="income" class="block mb-2 text-xl">Income</label>
-        <input v-model.number="income" type="number" name="income" id="income" step="1" min="0" placeholder="pre-tax income" class="bg-gray-200 text-gray-900 p-1 shadow:md">
+      <div class="p-6 pt-4 bg-gradient-to-r from-green-800 to-green-400 text-black shadow-lg rounded-sm">
+        <label for="income" class="block mb-2 text-xl text-green-100">Income</label>
+        <div class="flex items-center">
+          <span class="pr-2 text-green-100">$</span>
+          <input v-model.number="income" type="number" name="income" id="income" step="1" min="0" placeholder="pre-tax income" class="bg-gray-200 text-gray-900 p-1 shadow:md">
+        </div>
       </div>
 
       <div class="mt-8 py-4 text-xl">
         <span class="inline-block w-36">Income</span>
-        <output class="py-1 px-2 bg-yellow-200 text-gray-900">${{ income.toLocaleString() }}</output>
+        <output class="py-1 px-2 bg-yellow-300 text-gray-900">${{ income.toLocaleString() }}</output>
       </div>
       <div class="py-4 text-xl">
         <span class="inline-block w-36">Tax</span>
@@ -29,25 +32,27 @@
         </p>
       </div>
 
-      <section class="p-6 py-2 border border-solid border-yellow-400">
+      <section class="py-6 border border-solid border-yellow-400">
 
-        <div class="py-4 text-xl">
+        <div class="px-4 max-w-lg flex items-center gap-x-2 text-xl">
           <span class="inline-block text-yellow-200 w-36">Nett</span>
-          <output class="py-2 px-4 bg-gradient-to-tr from-yellow-400 to-white text-gray-900">${{ round(nett()).toLocaleString() }}</output>
+          <output class="flex-1 py-2 px-2 text-right bg-yellow-300 text-gray-900">$ {{ round(nett()).toLocaleString() }}</output>
         </div>
+
+        <span class="h-2 my-4 block border-b border-dashed border-gray-500"/>
         
-        <div class="py-2">
-          <p class="mb-2">
-            <span class="inline-block text-right w-36 px-4 text-yellow-200">/ week</span>
-            <output class="py-1 px-2 bg-gradient-to-tr from-yellow-300 to-yellow-200 text-gray-900">${{ round(nett()/52).toLocaleString() }}</output>
+        <div class="px-4 max-w-lg">
+          <p class="flex gap-x-2 items-center mb-2">
+            <span class="inline-block w-36 text-yellow-200">/ week</span>
+            <output class="flex-1 py-1 px-2 text-right bg-yellow-300 text-gray-900">$ {{ round(nett()/52).toLocaleString() }}</output>
           </p>
-          <p class="mb-2">
-            <span class="inline-block text-right w-36 px-4 text-yellow-200">/ fortnight</span>
-            <output class="py-1 px-2 bg-gradient-to-tr from-yellow-300 to-yellow-200 text-gray-900">${{ round(nett()/26).toLocaleString() }}</output>
+          <p class="flex gap-x-2 items-center mb-2">
+            <span class="inline-block w-36 text-yellow-200">/ fortnight</span>
+            <output class="flex-1 py-1 px-2 text-right bg-yellow-300 text-gray-900">$ {{ round(nett()/26).toLocaleString() }}</output>
           </p>
-          <p class="mb-2">
-            <span class="inline-block text-right w-36 px-4 text-yellow-200">/ month</span>
-            <output class="py-1 px-2 bg-gradient-to-tr from-yellow-300 to-yellow-200 text-gray-900">${{ round(nett()/12).toLocaleString() }}</output>
+          <p class="flex gap-x-2 items-center">
+            <span class="inline-block w-36 text-yellow-200">/ month</span>
+            <output class="flex-1 py-1 px-2 text-right bg-yellow-300 text-gray-900">$ {{ round(nett()/12).toLocaleString() }}</output>
           </p>
         </div>
 
@@ -96,7 +101,7 @@ export default {
 
     data() {
       return {
-        income: 64.2*1000,
+        income: 75_000,
       }
     },
 
