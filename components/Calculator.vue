@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-3xl mb-4">2023/24 Australian Income Tax Calculator</h1>
+    <h1 class="text-3xl mb-4">2024/25 Australian Income Tax Calculator</h1>
 
     <form>
       <div class="p-6 pt-4 bg-gradient-to-r from-green-800 to-green-400 text-black shadow-lg rounded-sm">
@@ -73,24 +73,10 @@
 
 <script>
 export default {
-    /*
-    0 – $18,200     Nil
-    $18,201 – $45,000   19 cents for each $1 over $18,200
-    $45,001 – $120,000  $5,092 plus 32.5 cents for each $1 over $45,000
-    $120,001 – $180,000 $29,467 plus 37 cents for each $1 over $120,000
-    $180,001 and over   $51,667 plus 45 cents for each $1 over $180,000
-
-    Medicare: = i * 0.02
-    Income -= Medicare 
-
-    < $23,226 no medicare levy.
-    It does reduce between that and 29033, but I don't know according to which formula.
-    */
-
     props: {
       finYear: {
         type: String,
-        default: () => '2023-24'
+        default: () => '2024-25',
       }
     },
 
@@ -143,8 +129,8 @@ export default {
             return {
               medicare: {
                 from: 23226, //levy starts to apply from this income, but at discounted rate
-                full: 29033, //reaches full rate (below) from this income
-                rate: 0.02
+                full: 29033, //reaches the full rate from this income
+                rate: 0.02,
               },
               taxBrackets: [
                 {from:      0, to:  18200, accumulatedTax:     0, rate:    0},
@@ -159,7 +145,7 @@ export default {
               medicare: {
                 from: 24276,
                 full: 30345,
-                rate: 0.02
+                rate: 0.02,
               },
               taxBrackets: [
                 {from:      0, to:  18200, accumulatedTax:     0, rate:    0},
@@ -175,7 +161,7 @@ export default {
               medicare: {
                 from: 24276,
                 full: 30345,
-                rate: 0.02
+                rate: 0.02,
               },
               taxBrackets: [
                 {from:      0, to:  18200, accumulatedTax:     0, rate:    0},
