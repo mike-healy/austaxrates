@@ -87,7 +87,7 @@ export default {
 
     data() {
       return {
-        income: 75_000,
+        income: 75*1000,
       }
     },
 
