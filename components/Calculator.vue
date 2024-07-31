@@ -3,7 +3,7 @@
     <h1 class="text-3xl mb-4">2024/25 Australian Income Tax Calculator</h1>
 
     <form>
-      <div class="p-6 pt-4 bg-gradient-to-r from-green-800 to-green-400 text-black shadow-lg rounded-sm">
+      <div class="p-6 pt-4 bg-gradient-to-r from-green-800 to-green-600 text-black shadow-lg rounded-sm">
         <label for="income" class="block mb-2 text-xl text-green-100">Income</label>
         <div class="flex items-center">
           <span class="pr-2 text-green-100">$</span>
